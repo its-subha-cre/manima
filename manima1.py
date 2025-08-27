@@ -254,7 +254,7 @@ slides = [
     {"img": "manima_tar_barite.jpg", "caption": "মানিমা তার বাড়িতে"},
     {"img": "manima_tar_mayer_sathe.jpeg", "caption": "মানিমা তার মায়ের সাথে"},
     {"img": "manima_tar_mejoboner_sathe.jpeg", "caption": "মানিমা মেজোবোনের সাথে"},
-    {"img": "manima_tar_poribar.jpeg", "caption": "মানিমা তার পরিবারের সাথে"},
+    
     
 ]
 
