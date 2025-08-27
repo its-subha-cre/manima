@@ -189,57 +189,84 @@ import time
 from pathlib import Path
 
 # সব ফটো + ক্যাপশন
+# slides = [
+#     ("manima_amr_sathe.jpg", "মানিমা আমার সাথে"),
+#     ("manima_borodidir_sathe.jpeg", "মানিমা বড়দিদির সাথে"),
+#     ("manima_mahisadal_rajbariir_samne.jpeg", "মানিমা মহিষাদল রাজবাড়ির সামনে"),
+#     ("manima_meshomonir_Sathe.jpeg", "মানিমা মেশোমণির সাথে"),
+#     ("manima_poribarer_sathe.jpg", "মানিমা পরিবারের সাথে"),
+#     ("manima_tar_barite.jpg", "মানিমা তার বাড়িতে"),
+#     # ("manima_tar_didir_sathe.jpg", "মানিমা দিদির সাথে"),
+#     ("manima_tar_mayer_sathe.jpeg", "মানিমা তার মায়ের সাথে"),
+#     ("manima_tar_mejoboner_sathe.jpeg", "মানিমা মেজোবোনের সাথে"),
+#     ("manima_tar_poribar.jpeg", "মানিমা তার পরিবারের সাথে"),
+#     ("manima.jpg", "আমাদের প্রিয় মানিমা"),
+# ]
+
+# # autoplay once
+# if "slideshow_played" not in st.session_state:
+#     st.session_state.slideshow_played = False
+
+# def image_to_html(img_path, caption):
+#     with open(img_path, "rb") as f:
+#         encoded = base64.b64encode(f.read()).decode()
+#     return f"""
+#     <div style='text-align:center;'>
+#         <img src="data:image/jpeg;base64,{encoded}" 
+#              style="height:400px; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.3);" />
+#         <p style='color:#FF1493; font-size:18px; font-weight:bold; margin-top:8px;'>{caption}</p>
+#     </div>
+#     """
+
+# if not st.session_state.slideshow_played:
+#     ph = st.empty()
+#     for img, cap in slides:
+#         img_path = Path(img)
+#         if img_path.exists():
+#             html = image_to_html(str(img_path), cap)
+#             ph.markdown(html, unsafe_allow_html=True)
+#             time.sleep(3)
+#         else:
+#             st.error(f"❌ ফাইল পাওয়া যায়নি: {img}")
+#     st.session_state.slideshow_played = True
+# else:
+#     # শেষ ছবি দেখাবে
+#     last_img, last_cap = slides[-1]
+#     img_path = Path(last_img)
+#     if img_path.exists():
+#         html = image_to_html(str(img_path), last_cap)
+#         st.markdown(html, unsafe_allow_html=True)
+#     else:
+#         st.error(f"❌ ফাইল পাওয়া যায়নি: {last_img}")
+
+count = st_autorefresh(interval=3000, limit=None, key="slideshow")
+
+# Slides data
 slides = [
-    ("manima_amr_sathe.jpg", "মানিমা আমার সাথে"),
-    ("manima_borodidir_sathe.jpeg", "মানিমা বড়দিদির সাথে"),
-    ("manima_mahisadal_rajbariir_samne.jpeg", "মানিমা মহিষাদল রাজবাড়ির সামনে"),
-    ("manima_meshomonir_Sathe.jpeg", "মানিমা মেশোমণির সাথে"),
-    ("manima_poribarer_sathe.jpg", "মানিমা পরিবারের সাথে"),
-    ("manima_tar_barite.jpg", "মানিমা তার বাড়িতে"),
-    # ("manima_tar_didir_sathe.jpg", "মানিমা দিদির সাথে"),
-    ("manima_tar_mayer_sathe.jpeg", "মানিমা তার মায়ের সাথে"),
-    ("manima_tar_mejoboner_sathe.jpeg", "মানিমা মেজোবোনের সাথে"),
-    ("manima_tar_poribar.jpeg", "মানিমা তার পরিবারের সাথে"),
-    ("manima.jpg", "আমাদের প্রিয় মানিমা"),
+    {"img": "manima_poribarer_sathe.jpg", "caption": "মানিমা পরিবারের সাথে"},
+    {"img": "manima.jpg", "caption": "মানিমা"},
+    {"img": "manima_tar_barite.jpg", "caption": "মানিমা তার বাড়িতে"},
+    {"img": "manima_amr_sathe.jpg", "caption": "মানিমা আমার সাথে"},
+    {"img": "manima_borodidir_sathe.jpeg", "caption": "মানিমা বড়দিদির সাথে"},
+    {"img": "manima_mahisadal_rajbariir_samne.jpeg", "caption": "মানিমা মহিষাদল রাজবাড়ির সামনে"},
+    {"img": "manima_meshomonir_Sathe.jpeg", "caption": "মানিমা মেশোমণির সাথে"},
+    {"img": "manima_poribarer_sathe.jpg", "caption": "মানিমা পরিবারের সাথে"},
+    {"img": "manima_tar_barite.jpg", "caption": "মানিমা তার বাড়িতে"},
+    {"img": "manima_tar_mayer_sathe.jpeg", "caption": "মানিমা তার মায়ের সাথে"},
+    {"img": "manima_tar_mejoboner_sathe.jpeg", "caption": "মানিমা মেজোবোনের সাথে"},
+    {"img": "manima_tar_poribar.jpeg", "caption": "মানিমা তার পরিবারের সাথে"},
+    {"img": "manima.jpg", "caption": "মানিমা"}
 ]
 
-# autoplay once
-if "slideshow_played" not in st.session_state:
-    st.session_state.slideshow_played = False
 
-def image_to_html(img_path, caption):
-    with open(img_path, "rb") as f:
-        encoded = base64.b64encode(f.read()).decode()
-    return f"""
-    <div style='text-align:center;'>
-        <img src="data:image/jpeg;base64,{encoded}" 
-             style="height:400px; border-radius:16px; box-shadow:0 4px 12px rgba(0,0,0,0.3);" />
-        <p style='color:#FF1493; font-size:18px; font-weight:bold; margin-top:8px;'>{caption}</p>
-    </div>
-    """
+index = count % len(slides)
+current = slides[index]
 
-if not st.session_state.slideshow_played:
-    ph = st.empty()
-    for img, cap in slides:
-        img_path = Path(img)
-        if img_path.exists():
-            html = image_to_html(str(img_path), cap)
-            ph.markdown(html, unsafe_allow_html=True)
-            time.sleep(3)
-        else:
-            st.error(f"❌ ফাইল পাওয়া যায়নি: {img}")
-    st.session_state.slideshow_played = True
-else:
-    # শেষ ছবি দেখাবে
-    last_img, last_cap = slides[-1]
-    img_path = Path(last_img)
-    if img_path.exists():
-        html = image_to_html(str(img_path), last_cap)
-        st.markdown(html, unsafe_allow_html=True)
-    else:
-        st.error(f"❌ ফাইল পাওয়া যায়নি: {last_img}")
-
-
+st.image(current["img"], use_container_width=True)
+st.markdown(
+    f"<p style='text-align:center; font-size:18px; color:darkblue;'>{current['caption']}</p>",
+    unsafe_allow_html=True
+)
 
 
 
@@ -293,7 +320,7 @@ folium.Marker(
 st_data = st_folium(
     m,
     width="100%",    # পুরো স্ক্রিন জুড়ে যাবে
-    height=200,      # মোবাইলের জন্য ছোট height
+    height=400,      # মোবাইলের জন্য ছোট height
     returned_objects=[]
 )
 
